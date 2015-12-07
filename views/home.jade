@@ -1,0 +1,34 @@
+extends layout
+block content
+    div.container
+        div.row
+            div.col-sm-6.col-md-4.col-md-offset-4
+                #user
+                    h1.text-center.login-title Welcome to Terrier Spot-It #{user.firstName}!
+                    form(class='form-signin', action='/lostitem')
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Did you lose something?
+                    form(class='form-signin', action='/founditem')
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Did you find something?
+                    h1.text-center.login-title <br> Check your details below:
+                        div.signup-wall
+                            table.user-details(style='width:100%')
+                                tr
+                                    td Username:
+                                    td #{user.username}
+                                tr
+                                    td Email:
+                                    td #{user.email}
+                                tr
+                                    td First Name:
+                                    td #{user.firstName}
+                                tr
+                                    td Last Name:
+                                    td #{user.lastName}
+                                tr
+                                    td Phone Number:
+                                    td #{user.telephone}
+                                tr
+                                    td BU ID:
+                                    td #{user.buid}
+
+                        a(href='/signout', class='text-center new-account') Sign Out

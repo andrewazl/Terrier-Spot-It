@@ -1,15 +1,21 @@
 extends layout
-
 block content
-  h1= title
-  p
-  img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Boston_University_Wordmark.svg/2000px-Boston_University_Wordmark.svg.png', align = 'right',height = '186', width = '400')
-  // img(src='https://scontent-lga3-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/12189137_10206910461495971_3143562682755493675_n.jpg?oh=1acbe3fcd74b9eff0cc30035f46bbb0a&oe=56B5BEBC', align = 'right',height = '288', width = '449')
-  p Welcome to #{title}
+  div.container
+    div.row
+      div.col-sm-6.col-md-4.col-md-offset-4
+        h1.text-center.login-title Log in to Terrier Spot-It!
+          div.account-wall
+            img(class='profile-img', src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/Boston_University_Terriers.svg/1129px-Boston_University_Terriers.svg.png')
+            form(class='form-signin', action='/login', method='POST')
+              input(type='text', name='username' class='form-control', placeholder='Username',required, autofocus)
+              input(type='password', name='password' class='form-control', placeholder='Password', required)
+              button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+              span.clearfix
+          a(href='/signup', class='text-center new-account') Create an account
+          #message
+          if message
+            h1.text-center.error-message #{message}
 
-  a(href='/test') Test the Google API here!
-  br
-  a(href='/form') Lose an Item?
 
 
 
