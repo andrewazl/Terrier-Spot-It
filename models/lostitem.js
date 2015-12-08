@@ -7,6 +7,7 @@ module.exports = mongoose.model('lostItem',{
     username: String,
     lostitem: String,
     description: String,
-    address: String,
+    latitude: String,
+    longitude: String,
     created_at: Date
 });

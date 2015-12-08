@@ -1,0 +1,40 @@
+doctype html
+html
+   head
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css')
+   body
+      h1= title
+      p Please input a location below:
+      #floating-panel
+         input#address(type='textbox', value='George Sherman Union')
+         input#submit(type='button', value='Find')
+      br
+      #map
+      script(type='text/javascript').
+         var map;
+         function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+               center: {lat: 42.3496, lng: -71.0997},
+               zoom: 15
+            });
+            var geocoder = new google.maps.Geocoder();
+            document.getElementById('submit').addEventListener('click', function() {
+               geocodeAddress(geocoder, map);
+            });
+         }
+         function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+               if (status === google.maps.GeocoderStatus.OK) {
+                  resultsMap.setCenter(results[0].geometry.location);
+                  var marker = new google.maps.Marker({
+                     map: resultsMap,
+                     position: results[0].geometry.location
+                  });
+               } else {
+                  alert('Could not Geocode: ' + status);
+               }
+            });
+         }
+      script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBBh29L-rAcuz0hMNS4hCncrsNhK_BLPcw&callback=initMap')
