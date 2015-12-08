@@ -58,7 +58,8 @@ module.exports = function(passport){
     newlostItem.username = req.user.username;
     newlostItem.lostitem = req.body.lostitem;
     newlostItem.description = req.body.description;
-    newlostItem.address = req.body.address;
+    newlostItem.latitude = req.body.latitude;
+    newlostItem.longitude = req.body.longitude;
     newlostItem.created_at = today;
 
     // save the lost item
@@ -96,6 +97,18 @@ module.exports = function(passport){
       }
       console.log('Found Item information store succesful');
       res.render('map', { user: req.user, title: 'Map' });
+    });
+  });
+
+  router.get('/test', isAuthenticated, function(req, res) {
+    lostItem.find({}, function(err, users) {
+      var docs = {};
+
+      users.forEach(function(user) {
+        docs[user._id] = user;
+      });
+
+      res.render('test', { user:req.user, 'lostItemList': docs});
     });
   });
 

@@ -1,0 +1,14 @@
+//
+   Created by Jonathan on 12/7/15.
+
+extends layout
+block content
+   h1.
+      Test
+   ul
+      each item, i in lostItemList
+         li
+            =item.lostitem
+            =item.description
+            =item.address
+            =item.created_at
