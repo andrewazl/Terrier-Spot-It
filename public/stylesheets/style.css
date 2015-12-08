@@ -1,6 +1,16 @@
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body#background {
+  background: url(../images/Marsh_Chapel.jpg) no-repeat 50% 50% fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
 }
 
 #map {
@@ -14,7 +24,11 @@ textarea {
 }
 
 a {
-  color: #00B7FF;
+  color: #FF0000;
+}
+
+a#index {
+  color: #f5f5f5;
 }
 
 .form-signin{
@@ -77,6 +91,14 @@ a {
   font-weight: 400;
   display: block;
 }
+
+.index-title {
+  color: #F5F5F5;
+  font-size: 24px;
+  font-weight: 400;
+  display: block;
+}
+
 .profile-img{
   width: 96px;
   height: 96px;
@@ -84,9 +106,18 @@ a {
   display: block;
 }
 .new-account{
+  color: #F5F5F5;
   display: block;
   margin-top: 10px;
+
 }
+.sign-out{
+  color: #555;
+  display: block;
+  margin-top: 10px;
+
+}
+
 h1.error-message{
   color: red;
 }
