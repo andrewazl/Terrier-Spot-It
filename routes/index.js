@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var lostItem = require('../models/lostitem');
+var foundItem = require('../models/founditem');
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
@@ -48,9 +50,58 @@ module.exports = function(passport){
     res.render('lostitem', { user: req.user, title: 'Lost Item Page' });
   });
 
+  /* Handle Lost Item POST */
+  router.post('/lostitem', isAuthenticated, function(req, res, done){
+    var newlostItem = new lostItem();
+    var today = new Date();
+
+    newlostItem.username = req.user.username;
+    newlostItem.lostitem = req.body.lostitem;
+    newlostItem.description = req.body.description;
+    newlostItem.address = req.body.address;
+    newlostItem.created_at = today;
+
+    // save the lost item
+    newlostItem.save(function(err) {
+      if (err){
+        console.log('Error in Saving Lost Item: '+err);
+        throw err;
+      }
+      console.log('Lost Item information store succesful');
+      res.render('map', { user: req.user, title: 'Map' });
+    });
+  });
+
   /* GET Found Item Page */
   router.get('/founditem', isAuthenticated, function(req, res){
     res.render('founditem', { user: req.user, title: 'Found Item Page' });
+  });
+
+  /* Handle Found Item POST */
+  router.post('/founditem', isAuthenticated, function(req, res, done){
+    var newfoundItem = new foundItem();
+    var today = new Date();
+
+    newfoundItem.username = req.user.username;
+    newfoundItem.founditem = req.body.founditem;
+    newfoundItem.description = req.body.description;
+    newfoundItem.address = req.body.address;
+    newfoundItem.created_at = today;
+
+    // save the found item
+    newfoundItem.save(function(err) {
+      if (err){
+        console.log('Error in Saving Found Item: '+err);
+        throw err;
+      }
+      console.log('Found Item information store succesful');
+      res.render('map', { user: req.user, title: 'Map' });
+    });
+  });
+
+  /* GET Map Page */
+  router.get('/map', isAuthenticated, function(req, res){
+    res.render('map', { user: req.user, title: 'Map' });
   });
 
   /* Handle Logout */
